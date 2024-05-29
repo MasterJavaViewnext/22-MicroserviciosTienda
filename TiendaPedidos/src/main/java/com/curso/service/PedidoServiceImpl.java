@@ -59,7 +59,7 @@ public class PedidoServiceImpl implements PedidoService {
 	 */
 	private void actualizarStockProducto(int idProducto, int unidadesVendidas) {
 		//Creacion de la URI con los request param
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL_PRODUCTOS)
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL_PRODUCTOS + "/resta")
 		    .queryParam("id", idProducto)
 		    .queryParam("unidades", unidadesVendidas);
 

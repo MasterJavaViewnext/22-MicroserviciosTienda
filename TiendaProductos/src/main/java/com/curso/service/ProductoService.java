@@ -8,6 +8,7 @@ import com.curso.model.Producto;
 public interface ProductoService {
 	List<Producto> findAll();
 	Optional<Producto> findById(long id);
-	void updateStock(long id, int unidades);
+	void restaStock(long id, int unidades);
+	void sumaStock(long id, int unidades);
 	Double getPrecioById(long id);
 }

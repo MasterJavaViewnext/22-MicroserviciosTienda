@@ -13,7 +13,12 @@ public interface ProductoDao extends JpaRepository<Producto, Long>{
 	@Transactional
 	@Modifying
 	@Query("UPDATE Producto p SET p.stock = p.stock - ?2 WHERE p.id = ?1")
-	void updateStock(long id, int unidades);
+	void restaStock(long id, int unidades);
+	
+	@Transactional
+	@Modifying
+	@Query("UPDATE Producto p SET p.stock = p.stock + ?2 WHERE p.id = ?1")
+	void sumaStock(long id, int unidades);
 
 
 }

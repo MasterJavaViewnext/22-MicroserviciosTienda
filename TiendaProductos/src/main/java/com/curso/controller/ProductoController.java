@@ -30,10 +30,17 @@ public class ProductoController {
 	Producto findById(@PathVariable long id) {
 		return service.findById(id).orElse(null);
 	}
+
+	//Método que resta las unidades indicadas al stock del producto con ese id
+	@PutMapping(value = "resta")
+	void restaStock(@RequestParam int id, @RequestParam int unidades) {
+		service.restaStock(id, unidades);
+	}
 	
-	@PutMapping
-	void updateStock(@RequestParam int id, @RequestParam int unidades) {
-		service.updateStock(id, unidades);
+	//Método que suma las unidades indicadas al stock del producto con ese id
+	@PutMapping(value = "suma")
+	void sumaStock(@RequestParam int id, @RequestParam int unidades) {
+		service.sumaStock(id, unidades);
 	}
 	
 	@GetMapping(value = "precio/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

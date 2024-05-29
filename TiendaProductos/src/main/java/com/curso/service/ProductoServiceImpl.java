@@ -26,9 +26,13 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public void updateStock(long id, int unidades) {
-		dao.updateStock(id, unidades);
-		
+	public void restaStock(long id, int unidades) {
+		dao.restaStock(id, unidades);
+	}
+
+	@Override
+	public void sumaStock(long id, int unidades) {
+		dao.sumaStock(id, unidades);
 	}
 
 	@Override
