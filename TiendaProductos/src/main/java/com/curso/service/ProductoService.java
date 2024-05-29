@@ -11,4 +11,7 @@ public interface ProductoService {
 	void restaStock(long id, int unidades);
 	void sumaStock(long id, int unidades);
 	Double getPrecioById(long id);
+	Long getStockById(long id);
+	void insert(Producto producto);
+	void delete(long id);
 }

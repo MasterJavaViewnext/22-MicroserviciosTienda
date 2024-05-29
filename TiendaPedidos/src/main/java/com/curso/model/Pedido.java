@@ -28,6 +28,12 @@ public class Pedido implements Serializable {
 	public Pedido() {
 	}
 
+	public Pedido(String nombreCliente, int idProducto, int cantidad) {
+		this.nombreCliente = nombreCliente;
+		this.idProducto = idProducto;
+		this.cantidad = cantidad;
+	}
+
 	public Pedido(LocalDateTime fecha, String nombreCliente, int idProducto, int cantidad) {
 		this.fecha = fecha;
 		this.nombreCliente = nombreCliente;

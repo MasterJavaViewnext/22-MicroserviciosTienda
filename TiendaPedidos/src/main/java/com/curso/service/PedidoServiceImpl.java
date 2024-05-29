@@ -1,5 +1,6 @@
 package com.curso.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +33,40 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public void insert(Pedido pedido) {
-		pedido.setPrecio(calcularPrecio(pedido.getIdProducto(), pedido.getCantidad()));
-		dao.save(pedido);
-		actualizarStockProducto(pedido.getIdProducto(), pedido.getCantidad());
+	public boolean insert(Pedido pedido) {
+		boolean insertRealizado; 
+		if (cantidadPosible(pedido.getIdProducto(), pedido.getCantidad())) {
+			//Introducimos la fecha actual si no se especificó
+			if (pedido.getFecha() == null) pedido.setFecha(LocalDateTime.now());
+			//Introducmos el precio calculado 
+			pedido.setPrecio(calcularPrecio(pedido.getIdProducto(), pedido.getCantidad()));
+			//Insertamos el pedido
+			dao.save(pedido);
+			insertRealizado = true;
+			//Actualizamos el stock de producto
+			actualizarStockProducto(pedido.getIdProducto(), pedido.getCantidad());
+		} else {
+			insertRealizado = false;
+		}
+		return insertRealizado;
+	}
+
+	@Override
+	public void delete(long id) {
+		dao.delete(findById(id).orElse(null));
+	}
+	
+	/**
+	 * Método que realiza una peticion get para obtener el stock de un producto mediante
+	 * su id y comprueba si hay las unidades suficientes para realizar el pedido
+	 * @param idProducto
+	 * @param unidadesVendidas
+	 * @return precioCalculado
+	 */
+	private boolean cantidadPosible(int idProducto, int unidadesVendidas) {
+		boolean posible = false;
+		posible = template.getForObject(URL_PRODUCTOS + "/stock/" + idProducto, Long.class) >= unidadesVendidas;
+		return posible;
 	}
 	
 	/**

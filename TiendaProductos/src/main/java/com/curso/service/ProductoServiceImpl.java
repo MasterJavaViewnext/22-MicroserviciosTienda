@@ -24,6 +24,16 @@ public class ProductoServiceImpl implements ProductoService {
 	public Optional<Producto> findById(long id) {
 		return dao.findById(id);
 	}
+	
+	@Override
+	public void insert(Producto producto) {
+		dao.save(producto);
+	}
+	
+	@Override
+	public void delete(long id) {
+		dao.delete(findById(id).orElse(null));
+	}
 
 	@Override
 	public void restaStock(long id, int unidades) {
@@ -40,5 +50,12 @@ public class ProductoServiceImpl implements ProductoService {
 		Producto producto = findById(id).orElse(null);
 		return producto.getPrecio();
 	}
+	
+	@Override
+	public Long getStockById(long id) {
+		Producto producto = findById(id).orElse(null);
+		return producto.getStock();
+	}
+
 
 }
