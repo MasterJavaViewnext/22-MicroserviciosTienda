@@ -42,6 +42,8 @@ Testing: http://localhost:7000
 ## Features
 
 - Creacion de 2 microservicios
+- CRUD Producto
+- CRUD Pedido
 - Interoperabilidad entre los mismos
 - Actualizacion automatica de stock al insertar pedido
 - Calculo de precio del pedido automatico al insertar pedid
